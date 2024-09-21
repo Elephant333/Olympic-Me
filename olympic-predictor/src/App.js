@@ -27,7 +27,7 @@ function App() {
   return (
     <Container className="mt-10 p-6 border rounded-lg shadow-lg flex flex-col space-y-6" maxWidth="sm">
       <Typography variant="h4" align="center" gutterBottom>
-        Olympic Event Predictor
+        🏃Your Olympic Path🏋️
       </Typography>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
         {" "}
@@ -69,7 +69,7 @@ function App() {
           align="center"
           className="mt-6 text-green-600 space-y-6"
         >
-          Predicted Event: {predictedEvent}
+          You'd Be Best At: {predictedEvent}!
         </Typography>
       )}
     </Container>
