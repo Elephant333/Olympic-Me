@@ -12,6 +12,8 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // use http://localhost:5000/predict to test locally
+      // and /api/predict when hosted on vercel
       const response = await axios.post("/api/predict", {
         sex,
         age: parseInt(age),
