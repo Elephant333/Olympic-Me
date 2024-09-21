@@ -12,7 +12,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/predict", {
+      const response = await axios.post("/api/predict", {
         sex,
         age: parseInt(age),
         height: parseFloat(height),

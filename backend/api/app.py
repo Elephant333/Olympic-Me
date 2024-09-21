@@ -1,17 +1,9 @@
-from flask import Flask, request, jsonify, send_from_directory
-from flask_cors import CORS  # Import CORS
-from test_model import test_model
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from backend.api.test_model import test_model
 
-app = Flask(__name__, static_folder='../frontend/build', static_url_path='')
+app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
-
-@app.route('/')
-def serve():
-    return send_from_directory(app.static_folder, 'index.html')
-
-@app.route('/<path:path>')
-def static_proxy(path):
-    return send_from_directory(app.static_folder, path)
 
 @app.route('/predict', methods=['POST'])
 def predict():
