@@ -5,8 +5,8 @@ import itertools
 import argparse
 
 # Load the model and encoder
-model = tf.keras.models.load_model('../model.h5')
-encoder = joblib.load('../encoder.pkl')
+model = tf.keras.models.load_model('model.h5')
+encoder = joblib.load('encoder.pkl')
 
 # Function to test the model with new biometric inputs
 def test_model(sex, age, height_inches, weight_pounds):
