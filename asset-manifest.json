@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Olympic-Me/static/css/main.34e093f0.css",
+    "main.js": "/Olympic-Me/static/js/main.9291fbd0.js",
+    "index.html": "/Olympic-Me/index.html",
+    "main.34e093f0.css.map": "/Olympic-Me/static/css/main.34e093f0.css.map",
+    "main.9291fbd0.js.map": "/Olympic-Me/static/js/main.9291fbd0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.34e093f0.css",
+    "static/js/main.9291fbd0.js"
+  ]
+}
