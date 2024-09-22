@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { TextField, Button, Typography, Container } from "@mui/material";
+import { TextField, Button, Typography, Container, CircularProgress } from "@mui/material";
 
 function App() {
   const [sex, setSex] = useState("");
@@ -8,12 +8,12 @@ function App() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [predictedEvent, setPredictedEvent] = useState("");
+  const [loading, setLoading] = useState(false); // New loading state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when starting the request
     try {
-      // use http://localhost:5000/predict to test locally
-      // https://olympic-me-backend.onrender.com/predict when backend on render
       const response = await axios.post("https://olympic-me-backend.onrender.com/predict", {
         sex,
         age: parseInt(age),
@@ -23,6 +23,8 @@ function App() {
       setPredictedEvent(response.data.predicted_event);
     } catch (error) {
       console.error("Error predicting event:", error);
+    } finally {
+      setLoading(false); // Set loading to false when the request is done
     }
   };
 
@@ -32,8 +34,6 @@ function App() {
         🏃Your Olympic Path🏋️
       </Typography>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
-        {" "}
-        {/* Added space-y-6 for vertical spacing */}
         <TextField
           label="Sex (M/F)"
           value={sex}
@@ -61,8 +61,8 @@ function App() {
           onChange={(e) => setWeight(e.target.value)}
           required
         />
-        <Button variant="contained" color="primary" type="submit">
-          Predict Event
+        <Button variant="contained" color="primary" type="submit" disabled={loading} style={{ position: 'relative' }}>
+          {loading ? <CircularProgress size={24} style={{ position: 'absolute', left: '50%', top: '50%', marginLeft: -12, marginTop: -12 }} /> : "Predict Event"}
         </Button>
       </form>
       {predictedEvent && (
