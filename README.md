@@ -4,10 +4,19 @@ This is a fun little project where I trained a machine learning model on the pas
 
 ## To run locally:
 
-In the backend folder, you can run:
+In the backend folder, run:
 
 ### `python ./app.py`
 
-In the olympic-predictor folder, you can run:
+In the olympic-predictor folder, run:
 
 ### `npm start`
+
+## To deploy frontend changes:
+
+In the olympic-predictor folder, run:
+
+```
+npm run build
+npm run deploy
+```
