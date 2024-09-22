@@ -1,7 +1,7 @@
 {
   "name": "olympic-predictor",
   "version": "0.1.0",
-  "homepage": "http://Elephant333.github.io/Olympic-Me",
+  "homepage": "http://Elephant333.github.io/olympian",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.13.3",
