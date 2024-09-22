@@ -1,11 +1,14 @@
-import pandas as pd
+import numpy as np
 import tensorflow as tf
 import joblib
 import itertools
 import argparse
 
-# Load the model and encoder
-model = tf.keras.models.load_model('model.h5')
+# Load the TensorFlow Lite model and encoder
+interpreter = tf.lite.Interpreter(model_path='model.tflite')
+interpreter.allocate_tensors()
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
 encoder = joblib.load('encoder.pkl')
 
 # Function to test the model with new biometric inputs
@@ -14,11 +17,18 @@ def test_model(sex, age, height_inches, weight_pounds):
     height_cm = height_inches * 2.54
     weight_kg = weight_pounds * 0.453592
 
-    # Prepare input data
-    input_data = pd.DataFrame([[1 if sex == 'M' else 0, age, height_cm, weight_kg]], columns=['Sex', 'Age', 'Height', 'Weight'])
+    # Prepare input data using numpy for efficiency
+    sex_value = 1 if sex == 'M' else 0
+    input_data = np.array([[sex_value, age, height_cm, weight_kg]], dtype=np.float32)
+
+    # Set input tensor
+    interpreter.set_tensor(input_details[0]['index'], input_data)
     
-    # Make prediction
-    prediction = model.predict(input_data)
+    # Run inference
+    interpreter.invoke()
+    
+    # Get prediction
+    prediction = interpreter.get_tensor(output_details[0]['index'])
     
     # Get predicted event
     predicted_event = encoder.inverse_transform([prediction.argmax()])[0]
