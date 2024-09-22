@@ -14,7 +14,9 @@ function App() {
     e.preventDefault();
     setLoading(true); // Set loading to true when starting the request
     try {
-      const response = await axios.post("https://olympic-me-backend.onrender.com/predict", {
+      // use http://localhost:5000/predict to test locally
+      // https://olympic-me-backend.onrender.com/predict when backend on render
+      const response = await axios.post("http://localhost:5000/predict", {
         sex,
         age: parseInt(age),
         height: parseFloat(height),
