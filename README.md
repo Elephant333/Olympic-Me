@@ -16,7 +16,4 @@ In the olympic-predictor folder, run:
 
 In the olympic-predictor folder, run:
 
-```
-npm run build
-npm run deploy
-```
+### `npm run deploy`
