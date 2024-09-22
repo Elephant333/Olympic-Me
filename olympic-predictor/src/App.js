@@ -14,7 +14,7 @@ function App() {
     try {
       // use http://localhost:5000/predict to test locally
       // https://olympic-me-backend.onrender.com/predict when backend on render
-      const response = await axios.post("http://localhost:5000/predict", {
+      const response = await axios.post("https://olympic-me-backend.onrender.com/predict", {
         sex,
         age: parseInt(age),
         height: parseFloat(height),
