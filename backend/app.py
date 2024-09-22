@@ -3,8 +3,7 @@ from flask_cors import CORS
 from test_model import test_model
 
 app = Flask(__name__)
-# Allow CORS for specific frontend URL
-cors = CORS(app, resources={r"/predict": {"origins": "https://olympic-me-frontend-4zbehdbai-elephant333s-projects.vercel.app"}})
+CORS(app)
 
 @app.route('/predict', methods=['POST'])
 def predict():
