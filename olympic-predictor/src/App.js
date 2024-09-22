@@ -13,7 +13,6 @@ function App() {
     e.preventDefault();
     try {
       // use http://localhost:5000/predict to test locally
-      // and /api/predict when hosted on vercel
       // https://olympic-me-backend.onrender.com/predict when backend on render
       const response = await axios.post("http://localhost:5000/predict", {
         sex,
