@@ -55,6 +55,10 @@ function App() {
       setAgeError("Age must be greater than 0");
       isError = true;
     }
+    if (ageValue > 125) {
+      setAgeError("I don't believe you're that old, try again");
+      isError = true;
+    }
     if (weightValue <= 0) {
       setWeightError("Weight must be greater than 0");
       isError = true;
