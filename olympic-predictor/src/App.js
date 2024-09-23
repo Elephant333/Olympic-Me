@@ -19,32 +19,67 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [feetError, setFeetError] = useState("");
   const [inchesError, setInchesError] = useState("");
+  const [ageError, setAgeError] = useState("");
+  const [weightError, setWeightError] = useState("");
+  const [sexError, setSexError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setFeetError(""); // Clear previous error
+    // Clear previous error
+    setFeetError("");
     setInchesError("");
+    setAgeError("");
+    setWeightError("");
+    setSexError("");
+    let isError = false;
 
+    const totalHeightInInches = parseInt(feet) * 12 + parseFloat(inches);
+    const ageValue = parseInt(age);
+    const weightValue = parseFloat(weight);
+
+    // Prevent submission if validation fails
+    if (!["M", "F"].includes(sex)) {
+      setSexError("Sex must be either M or F");
+      isError = true;
+    }
     if (parseInt(feet) <= 0) {
       setFeetError("Feet must be greater than 0");
-      return; // Prevent submission if validation fails
+      isError = true;
     }
     if (parseFloat(inches) < 0 || parseFloat(inches) > 12) {
       setInchesError("Inches must be between 0 and 12");
-      return; // Prevent submission if validation fails
+      isError = true;
+    }
+    if (ageValue <= 0) {
+      setAgeError("Age must be greater than 0");
+      isError = true;
+    }
+    if (weightValue <= 0) {
+      setWeightError("Weight must be greater than 0");
+      isError = true;
+    }
+    if (parseInt(feet) >= 9) {
+      setFeetError("I don't believe you're that tall, try again");
+      isError = true;
+    }
+    if (weightValue > 1500) {
+      setWeightError("I don't believe you're that heavy, try again");
+      isError = true;
+    }
+    if (isError) {
+      return;
     }
 
     setLoading(true); // Set loading to true when starting the request
     try {
-      const totalHeightInInches = parseInt(feet) * 12 + parseFloat(inches);
       // use http://localhost:5000/predict to test locally
       // https://olympic-me-backend.onrender.com/predict when backend on render
       const response = await axios.post("https://olympic-me-backend.onrender.com/predict", {
         sex,
-        age: parseInt(age),
+        age: ageValue,
         height: totalHeightInInches,
-        weight: parseFloat(weight),
+        weight: weightValue,
       });
       setPredictedEvent(response.data.predicted_event);
     } catch (error) {
@@ -67,6 +102,8 @@ function App() {
           label="Sex (M/F)"
           value={sex}
           onChange={(e) => setSex(e.target.value)}
+          error={!!sexError}
+          helperText={sexError}
           required
           className="w-full"
         />
@@ -75,6 +112,8 @@ function App() {
           type="number"
           value={age}
           onChange={(e) => setAge(e.target.value)}
+          error={!!ageError}
+          helperText={ageError}
           required
           className="w-full"
         />
@@ -105,6 +144,8 @@ function App() {
           type="number"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
+          error={!!weightError}
+          helperText={weightError}
           required
           className="w-full"
         />
@@ -121,7 +162,7 @@ function App() {
               className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
             />
           ) : (
-            "Predict Event"
+            "Predict Your Event"
           )}
         </Button>
       </form>
