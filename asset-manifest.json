@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/olympian/static/css/main.9a6e6328.css",
-    "main.js": "/olympian/static/js/main.e1fa186c.js",
+    "main.js": "/olympian/static/js/main.2f9f7a67.js",
     "index.html": "/olympian/index.html",
     "main.9a6e6328.css.map": "/olympian/static/css/main.9a6e6328.css.map",
-    "main.e1fa186c.js.map": "/olympian/static/js/main.e1fa186c.js.map"
+    "main.2f9f7a67.js.map": "/olympian/static/js/main.2f9f7a67.js.map"
   },
   "entrypoints": [
     "static/css/main.9a6e6328.css",
-    "static/js/main.e1fa186c.js"
+    "static/js/main.2f9f7a67.js"
   ]
 }
