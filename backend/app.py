@@ -3,7 +3,10 @@ from flask_cors import CORS
 from test_model import test_model
 
 app = Flask(__name__)
-CORS(app, resources={r"/predict": {"origins": "http://Elephant333.github.io"}})
+CORS(app, resources={
+    r"/predict": {"origins": "http://Elephant333.github.io"},
+    r"/": {"origins": "*"}  # Allow cron job to access the health check
+})
 
 @app.route('/')
 def health_check():
