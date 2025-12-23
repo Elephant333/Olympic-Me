@@ -39,7 +39,7 @@ function App() {
     const weightValue = parseFloat(weight);
 
     // Prevent submission if validation fails
-    if (!["M", "F"].includes(sex)) {
+    if (!["m", "f"].includes(sex.trim().toLowerCase())) {
       setSexError("Sex must be either M or F");
       isError = true;
     }
@@ -79,12 +79,15 @@ function App() {
     try {
       // use http://localhost:5000/predict to test locally
       // https://olympic-me-backend.onrender.com/predict when backend on render
-      const response = await axios.post("https://olympic-me-backend.onrender.com/predict", {
-        sex,
-        age: ageValue,
-        height: totalHeightInInches,
-        weight: weightValue,
-      });
+      const response = await axios.post(
+        "https://olympic-me-backend.onrender.com/predict",
+        {
+          sex,
+          age: ageValue,
+          height: totalHeightInInches,
+          weight: weightValue,
+        }
+      );
       setPredictedEvent(response.data.predicted_event);
     } catch (error) {
       console.error("Error predicting event:", error);
@@ -179,10 +182,25 @@ function App() {
         <div className="text-sm">
           <p>Powered with Machine Learning</p>
           <p>
-            Made by <a href="https://nathanjli.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">Nathan Li</a>
+            Made by{" "}
+            <a
+              href="https://nathanjli.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline"
+            >
+              Nathan Li
+            </a>
           </p>
           <p>
-            <a href="https://github.com/Elephant333/olympian/tree/main" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">Github Repo</a>
+            <a
+              href="https://github.com/Elephant333/olympian/tree/main"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline"
+            >
+              Github Repo
+            </a>
           </p>
         </div>
       </footer>
